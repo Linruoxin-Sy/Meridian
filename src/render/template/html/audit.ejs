@@ -1,0 +1,47 @@
+<div class="total-summary">
+  <h2 class="summary-title">📊 漏洞统计</h2>
+  <div class="total-count"><%- audit.summary.total %></div>
+  <p>个风险漏洞</p>
+</div>
+
+<div class="severity-grid">
+  <div class="severity-card critical">
+    <span class="count"><%- audit.summary.critical %></span>
+    <span class="label">关键漏洞</span>
+  </div>
+  <div class="severity-card high">
+    <span class="count"><%- audit.summary.high %></span>
+    <span class="label">高风险漏洞</span>
+  </div>
+  <div class="severity-card moderate">
+    <span class="count"><%- audit.summary.moderate %></span>
+    <span class="label">中风险漏洞</span>
+  </div>
+  <div class="severity-card low">
+    <span class="count"><%- audit.summary.low %></span>
+    <span class="label">低风险漏洞</span>
+  </div>
+</div>
+
+<div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin: 30px 0;">
+  <h3 style="color: #856404; margin-top: 0;">⚠️ 风险等级说明</h3>
+  <ul style="color: #856404; margin: 0;">
+    <li><strong>关键漏洞</strong>：极其严重，应立即修复</li>
+    <li><strong>高风险漏洞</strong>：严重威胁，应尽快修复</li>
+    <li><strong>中风险漏洞</strong>：中等威胁，建议及时修复</li>
+    <li><strong>低风险漏洞</strong>：轻微威胁，可根据需要修复</li>
+  </ul>
+</div>
+
+<% if (audit.summary.critical > 0) { %>
+  <%- include('./detail.ejs', {type:'critical', title: '🔴 关键漏洞详情', bgColor: '#ffebee'}); %>
+<% } %>
+<% if (audit.summary.high > 0) { %>
+  <%- include('./detail.ejs', {type:'high', title: '🟠 高风险漏洞详情', bgColor: '#fff3e0'}); %>
+<% } %>
+<% if (audit.summary.moderate > 0) { %>
+  <%- include('./detail.ejs', {type:'moderate', title: '🟡 中风险漏洞详情', bgColor: '#fffde7'}); %>
+<% } %>
+<% if (audit.summary.low > 0) { %>
+  <%- include('./detail.ejs', {type:'low', title: '🟢 低风险漏洞详情', bgColor: '#e8f5e8'}); %>
+<% } %>

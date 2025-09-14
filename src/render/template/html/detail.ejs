@@ -1,0 +1,11 @@
+<div style="background: <%- bgColor %>; border-radius: 8px; padding: 25px; margin: 30px 0;">
+  <h3 style="margin-top: 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px;">
+    <%- title %>
+  </h3>
+  
+  <% audit.vulnerabilities[type].forEach(function(vuln, index) { %>
+    <div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <%- include('./detail-item.ejs', {vuln: vuln, index: index + 1}); %>
+    </div>
+  <% }); %>
+</div>

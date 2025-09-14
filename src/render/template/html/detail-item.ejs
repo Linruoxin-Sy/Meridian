@@ -1,0 +1,64 @@
+<div style="border-left: 4px solid #007bff; padding-left: 15px;">
+  <h4 style="margin: 0 0 10px 0; color: #333;">
+    <span style="color: #007bff; font-weight: bold;">#<%- index %></span>
+    <%- vuln.name %>
+  </h4>
+  
+  <div style="margin-bottom: 15px;">
+    <span style="background: #e9ecef; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; color: #495057;">
+      严重程度: <strong><%- vuln.severity %></strong>
+    </span>
+  </div>
+
+  <% if (vuln.problems && vuln.problems.length > 0) { %>
+    <div style="margin: 15px 0;">
+      <h5 style="margin: 0 0 10px 0; color: #666;">相关问题:</h5>
+      <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; font-size: 0.9em;">
+        <% vuln.problems.forEach(function(problem, pIndex) { %>
+          <div style="margin-bottom: 8px;">
+            <% if (typeof problem === 'object' && problem.title) { %>
+              <strong><%- problem.title %></strong>
+              <% if (problem.url) { %>
+                <br><a href="<%- problem.url %>" target="_blank" style="color: #007bff; text-decoration: none;">查看详情</a>
+              <% } %>
+            <% } else { %>
+              <%- problem %>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (vuln.nodes && vuln.nodes.length > 0) { %>
+    <div style="margin: 15px 0;">
+      <h5 style="margin: 0 0 10px 0; color: #666;">影响的依赖路径:</h5>
+      <div style="background: #fff3cd; padding: 10px; border-radius: 4px; font-size: 0.9em;">
+        <% vuln.nodes.slice(0, 3).forEach(function(node) { %>
+          <code style="background: #fff; padding: 2px 6px; border-radius: 3px; margin: 2px; display: inline-block;"><%- node %></code>
+        <% }); %>
+        <% if (vuln.nodes.length > 3) { %>
+          <span style="color: #856404;">... 还有 <%- vuln.nodes.length - 3 %> 个</span>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (vuln.depChains && vuln.depChains.length > 0) { %>
+    <div style="margin: 15px 0;">
+      <h5 style="margin: 0 0 10px 0; color: #666;">依赖链:</h5>
+      <div style="background: #e7f3ff; padding: 10px; border-radius: 4px; font-size: 0.85em;">
+        <% vuln.depChains.slice(0, 2).forEach(function(chain) { %>
+          <div style="margin-bottom: 5px; font-family: monospace;">
+            <%- chain.join(' → ') %>
+          </div>
+        <% }); %>
+        <% if (vuln.depChains.length > 2) { %>
+          <div style="color: #0056b3; font-style: italic;">
+            ... 还有 <%- vuln.depChains.length - 2 %> 条依赖链
+          </div>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+</div>
