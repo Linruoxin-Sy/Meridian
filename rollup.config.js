@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
+import copy from 'rollup-plugin-copy'
 
 export default {
   input: 'src/index.ts',
@@ -15,6 +16,11 @@ export default {
     resolve(),
     commonjs(),
     typescript(),
-    json()
+    json(),
+    copy({
+      targets: [
+        { src: 'src/render/template/*', dest: 'dist/template' }
+      ]
+    })
   ]
 };

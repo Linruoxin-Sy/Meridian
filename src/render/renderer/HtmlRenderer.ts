@@ -1,16 +1,12 @@
 import { Renderer } from '../interfaces';
 import { NormalizedAuditResult } from '@/audit/interfaces/normalize';
 import { PackageJson } from '@/parse/interfaces';
-import { getDirname } from '@/utils';
 import ejs from 'ejs';
 import path from 'path';
+import { pathResolve } from './pathResolve';
 
 export class HtmlRenderer implements Renderer {
-  private templatePath: string;
-
-  constructor() {
-    this.templatePath = path.join(getDirname(import.meta.url), '..', 'template', 'html');
-  }
+  private templatePath: string = pathResolve("html");
 
   async render(auditResult: NormalizedAuditResult, packageJson: PackageJson): Promise<string> {
     const templateFile = path.join(this.templatePath, 'index.ejs');
