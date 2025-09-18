@@ -19,7 +19,7 @@ export async function audit(
   // 对工作目录进行审计
   const auditResult = await auditPackage(tempDir, packageJson);
   // 渲染审计结果
-  const renderedResult = await render(auditResult, packageJson, "html");
+  const renderedResult = await render(auditResult, packageJson, renderFormat);
   // 删除临时目录
   await removeDir(tempDir);
   // 将结果保存到指定路径
